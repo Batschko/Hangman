@@ -10,7 +10,7 @@ public class WordlistReader {
 	
 	public WordlistReader(String liste) throws IOException {
 		if(!readListFromFile(liste)) {
-			throw new IOException("Cant read file");
+			throw new IOException("Cant read file - "+new File(liste).getAbsolutePath());
 		}
 	}
 	

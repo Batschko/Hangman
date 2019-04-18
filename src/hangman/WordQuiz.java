@@ -8,6 +8,7 @@ import java.util.Random;
 public class WordQuiz {
 
 	protected String quizword;
+	protected int length;
 	protected String coveredQuizword;
 	protected boolean finish;
 	protected char[] guessedLetters;
@@ -20,6 +21,7 @@ public class WordQuiz {
 		remainingAttemps = attemps;
 		inputReader = cr;
 		wordlistReader = wr;
+		this.length = length;
 	}
 	
 	protected int compareInput(char input) {
@@ -51,21 +53,10 @@ public class WordQuiz {
 		
 		System.out.println("Welcome to Hangman - you fool!\n"
 				+ "\n"
-				+ "To play the game you shall give me a number of the letters that shall be guessed.\n");
-		System.out.print("Number: ");
-		int number = 0;
-		try {
-			number = Integer.parseInt(inputReader.readLine());
-			if(number<0) throw new IllegalArgumentException("Integer is less than 0");
-		} catch(NumberFormatException nfe) {
-			System.out.println("Number must be an Integer - "+nfe.getMessage());
-		} catch(IOException ioe) {
-			System.out.println("Error reading line - "+ioe.getMessage());
-		} catch(IllegalArgumentException iae) {
-			System.out.println(iae.getMessage());
-		}
+				+ "To play the game you shall give me a number of the letters that shall be guessed.\n"
+				+ "So lets start mate!\n");
 		
-		List<String> wordsOfLength = wordlistReader.getWordsOfLength(number);
+		List<String> wordsOfLength = wordlistReader.getWordsOfLength(length);
 		int ranNum = new Random().nextInt(wordsOfLength.size());
 		quizword = wordsOfLength.get(ranNum).toLowerCase();
 		coveredQuizword = createCoveredQuizword(quizword.length());
