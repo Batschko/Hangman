@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Mathis B, Lukas H
+ * 
+ * </br>created 18.04.2019
+ */
+
 public class WordQuiz {
 
 	protected String quizword;
@@ -18,6 +24,13 @@ public class WordQuiz {
 	protected ConsoleReader inputReader;
 	protected WordlistReader wordlistReader;
 	
+	/**
+	 * Constructor for Class
+	 * @param length Length of the word to guess
+	 * @param attemps Number of attemps until lose
+	 * @param cr ConsoleReader to read user input
+	 * @param wr WordlistReader to read words to guess from file
+	 */
 	public WordQuiz(int length, int attemps, ConsoleReader cr, WordlistReader wr) {
 		guessedLetters = new char[attemps];
 		remainingAttemps = attemps;
@@ -26,6 +39,10 @@ public class WordQuiz {
 		this.length = length;
 	}
 	
+	/** 
+	 * Main Method to run the game
+	 * @param args Arguments from command line
+	 */
 	public static void main(String[] args) {
 		ConsoleReader cr = new ConsoleReader(new BufferedReader(new InputStreamReader(System.in)));
 		WordlistReader wr = null;
@@ -61,6 +78,11 @@ public class WordQuiz {
 		
 	}
 	
+	/**
+	 * Compare the input witht the quizword
+	 * @param input Letter to compare
+	 * @return Number of appereances of input in the quizword
+	 */
 	protected int compareInput(char input) {
 		int compare = 0;
 		char[] charsOfQuizword = quizword.toCharArray();
@@ -72,6 +94,11 @@ public class WordQuiz {
 		return compare;
 	}
 	
+	/**
+	 * Uncover the given letter on the given position
+	 * @param letter Letter to uncover
+	 * @param pos Position in String
+	 */
 	protected void uncover(char letter, int pos) {
 	
 		char[] word = coveredQuizword.toCharArray();
@@ -80,12 +107,20 @@ public class WordQuiz {
 		
 	}
 	
+	/**
+	 * Uncover given letter on every position provided by the List
+	 * @param letter Letter to uncover
+	 * @param positions Positions in String
+	 */
 	protected void uncover(char letter, List<Integer> positions) {
 		for(int pos : positions) {
 			uncover(letter, pos);
 		}
 	}
 	
+	/**
+	 * Method which provides to play the game
+	 */
 	public void playGame() {
 		
 		System.out.println("Welcome to Hangman - you fool!\n"
@@ -133,11 +168,20 @@ public class WordQuiz {
 		}
 	}
 	
+	/**
+	 * Checks if the user won the game
+	 * @return true if the user guessed all letters of the word
+	 */
 	private boolean checkWin() {
 		if(quizword.equals(coveredQuizword)) return true;
 		return false;
 	}
 	
+	/**
+	 * Creates a cover word with _ for the given length
+	 * @param length Length of the cover word
+	 * @return String with covered word
+	 */
 	private String createCoveredQuizword(int length) {
 		
 		String coveredString = "";
@@ -148,7 +192,9 @@ public class WordQuiz {
 		
 		return coveredString;
 	}
-	
+	 /**
+	  * Prints the current game info
+	  */
 	private void printGameInfo() {
 		System.out.println();
 		System.out.println("Remaining attemps: "+remainingAttemps);
