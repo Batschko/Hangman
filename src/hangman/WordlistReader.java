@@ -9,6 +9,7 @@ public class WordlistReader {
 	private List<String> wordlist;
 	
 	public WordlistReader(String liste) throws IOException {
+		wordlist = new ArrayList<String>();
 		if(!readListFromFile(liste)) {
 			throw new IOException("Cant read file - "+new File(liste).getAbsolutePath());
 		}

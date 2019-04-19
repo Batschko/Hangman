@@ -22,7 +22,7 @@ public class Main {
 			System.out.println(nfe.getMessage());
 		}
 		
-		System.out.print("Choose a number of attempts");
+		System.out.print("Choose a number of attempts: ");
 		int attempts = 0;
 		try {
 			attempts = Integer.parseInt(cr.readLine());

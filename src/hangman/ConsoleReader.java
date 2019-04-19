@@ -13,7 +13,7 @@ public class ConsoleReader {
 	
 	public char readNextChar() throws IOException {
 		char nextChar = (char) -1;
-		nextChar = (char)reader.read();
+		nextChar = reader.readLine().charAt(0);
 		return nextChar;
 	}
 	

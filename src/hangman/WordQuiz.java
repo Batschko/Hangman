@@ -17,7 +17,7 @@ public class WordQuiz {
 	protected WordlistReader wordlistReader;
 	
 	public WordQuiz(int length, int attemps, ConsoleReader cr, WordlistReader wr) {
-		guessedLetters = new char[length];
+		guessedLetters = new char[attemps];
 		remainingAttemps = attemps;
 		inputReader = cr;
 		wordlistReader = wr;
@@ -39,7 +39,7 @@ public class WordQuiz {
 	
 		char[] word = coveredQuizword.toCharArray();
 		word[pos] = letter;
-		coveredQuizword = word.toString();
+		coveredQuizword = new String(word);
 		
 	}
 	
@@ -63,6 +63,7 @@ public class WordQuiz {
 		
 		while(true) {
 			printGameInfo();
+			System.out.print("\nGuess a letter: ");
 			char guess = ' ';
 			try {
 				guess = Character.toLowerCase(inputReader.readNextChar());
@@ -86,7 +87,8 @@ public class WordQuiz {
 			}
 			
 			if(checkWin()) {
-				System.out.println("You win - well done, mate! Grab a beer and celebrate you victory!");
+				System.out.println("You win - well done, mate! Grab a beer and celebrate your victory!");
+				break;
 			} else if(remainingAttemps==0) {
 				System.out.println("Game over - you los, mate! Pack your things and try again!");
 				break;
@@ -95,7 +97,7 @@ public class WordQuiz {
 	}
 	
 	private boolean checkWin() {
-		if(quizword==coveredQuizword) return true;
+		if(quizword.equals(coveredQuizword)) return true;
 		return false;
 	}
 	
