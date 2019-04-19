@@ -1,6 +1,8 @@
 package hangman;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +24,41 @@ public class WordQuiz {
 		inputReader = cr;
 		wordlistReader = wr;
 		this.length = length;
+	}
+	
+	public static void main(String[] args) {
+		ConsoleReader cr = new ConsoleReader(new BufferedReader(new InputStreamReader(System.in)));
+		WordlistReader wr = null;
+		try {
+			wr = new WordlistReader("words.txt");
+		} catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+			System.exit(0);
+		}
+		
+		System.out.print("Choose a length of the word: ");
+		int length = 0;
+		try {
+			length = Integer.parseInt(cr.readLine());
+		} catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		} catch(NumberFormatException nfe) {
+			System.out.println(nfe.getMessage());
+		}
+		
+		System.out.print("Choose a number of attempts: ");
+		int attempts = 0;
+		try {
+			attempts = Integer.parseInt(cr.readLine());
+		} catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		} catch(NumberFormatException nfe) {
+			System.out.println(nfe.getMessage());
+		}
+		
+		WordQuiz wq = new WordQuiz(length, attempts, cr, wr);
+		wq.playGame();
+		
 	}
 	
 	protected int compareInput(char input) {
@@ -73,9 +110,9 @@ public class WordQuiz {
 			
 			guessedLetters[guessedLetters.length-remainingAttemps] = guess;
 			int appereances = compareInput(guess);
-			remainingAttemps--;
 			if(appereances==0) {
 				System.out.println("Wrong letter mate - try again!");
+				remainingAttemps--;
 			} else {
 				List<Integer> positions = new ArrayList<Integer>();
 				for(int i=0;i<quizword.length();i++) {
@@ -87,7 +124,7 @@ public class WordQuiz {
 			}
 			
 			if(checkWin()) {
-				System.out.println("You win - well done, mate! Grab a beer and celebrate your victory!");
+				System.out.println("You win - "+quizword+" is the word! Well done, mate! Grab a beer and celebrate your victory!");
 				break;
 			} else if(remainingAttemps==0) {
 				System.out.println("Game over - you los, mate! Pack your things and try again!");
