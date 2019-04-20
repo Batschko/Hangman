@@ -55,9 +55,9 @@ public class WordlistReader {
 	 * Reads all words from the given file
 	 * @param file Path to the file
 	 * @return true if words could be read
-	 * @throws FileNotFoundException
+	 * @throws IOException 
 	 */
-	protected boolean readListFromFile(String file) throws FileNotFoundException {
+	protected boolean readListFromFile(String file) throws IOException {
 		
 		File f = new File(file);
 		if(!f.exists()) {
@@ -69,6 +69,8 @@ public class WordlistReader {
 		} catch(IOException ioe) {
 			return false;
 		}
+		
+		fr.close();
 		
 		return true;
 	}
