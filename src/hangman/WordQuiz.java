@@ -23,7 +23,6 @@ public class WordQuiz {
 	protected int remainingAttemps;
 	protected ConsoleReader inputReader;
 	protected WordlistReader wordlistReader;
-	
 	/**
 	 * Constructor for Class
 	 * @param length Length of the word to guess
@@ -102,7 +101,7 @@ public class WordQuiz {
 	protected void uncover(char letter, int pos) {
 	
 		char[] word = coveredQuizword.toCharArray();
-		word[pos] = letter;
+		word[pos*2] = letter;
 		coveredQuizword = new String(word);
 		
 	}
@@ -159,10 +158,10 @@ public class WordQuiz {
 			}
 			
 			if(checkWin()) {
-				System.out.println("You win - "+quizword+" is the word! Well done, mate! Grab a beer and celebrate your victory!");
+				System.out.println("\nYou win - "+quizword+" is the word! Well done, mate! Grab a beer and celebrate your victory!");
 				break;
 			} else if(remainingAttemps==0) {
-				System.out.println("Game over - you los, mate! Pack your things and try again!");
+				System.out.println("\nGame over - you los, mate! Pack your things and try again!");
 				break;
 			}
 		}
@@ -173,7 +172,9 @@ public class WordQuiz {
 	 * @return true if the user guessed all letters of the word
 	 */
 	private boolean checkWin() {
-		if(quizword.equals(coveredQuizword)) return true;
+		String check=coveredQuizword.replaceAll(" ", "");
+		check.trim();
+		if(quizword.equals(check)) return true;
 		return false;
 	}
 	
