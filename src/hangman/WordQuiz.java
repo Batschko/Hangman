@@ -173,7 +173,6 @@ public class WordQuiz {
 	 */
 	private boolean checkWin() {
 		String check=coveredQuizword.replaceAll(" ", "");
-		check.trim();
 		if(quizword.equals(check)) return true;
 		return false;
 	}
