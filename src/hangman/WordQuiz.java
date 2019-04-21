@@ -187,7 +187,7 @@ public class WordQuiz {
 		String coveredString = "";
 		
 		for(int i=0;i<length;i++) {
-			coveredString = coveredString+"_";
+			coveredString = coveredString+"_ ";
 		}
 		
 		return coveredString;
